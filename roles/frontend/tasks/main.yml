@@ -2,3 +2,8 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
+
+- name: Include App Tasks from Common role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download-app-code
