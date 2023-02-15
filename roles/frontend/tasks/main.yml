@@ -7,3 +7,14 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: download-app-code
+
+- name: Copy Roboshop Configuration file
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: Start and Enable Nginx Service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
