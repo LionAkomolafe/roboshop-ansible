@@ -1,0 +1,11 @@
+- name: Setup systemd.service file
+  ansible.builtin.copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{ COMPONENT }}.service
+
+- name: Start {{ COMPONENT }} service
+  ansible.builtin.systemd:
+    name: catalogue
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
