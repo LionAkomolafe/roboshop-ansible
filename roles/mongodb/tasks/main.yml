@@ -13,3 +13,9 @@
     path: /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
+
+- name: Start and Enable mongod Service
+  ansible.builtin.yum:
+    name: mongod
+    state: restarted
+    enabled: yes
