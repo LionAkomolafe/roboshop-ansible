@@ -6,7 +6,7 @@
 - name: Install MongoDB repo
   ansible.builtin.yum:
     name: mongodb-org
-    status: installed
+    state: installed
 
 - name: Reconfigure Listen IP Address
   ansible.builtin.replace:
