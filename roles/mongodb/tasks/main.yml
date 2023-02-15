@@ -1,3 +1,15 @@
-- name: test for mongodb
-  debug:
-    msg: mongodb
+- name: Copy MongoDB yum repo file
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install MongoDB repo
+  ansible.builtin.yum:
+    name: mongodb-org
+    status: installed
+
+- name: Reconfigure Listen IP Address
+  ansible.builtin.replace:
+    path: mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
