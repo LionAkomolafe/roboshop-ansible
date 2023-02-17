@@ -19,3 +19,17 @@
     name: mongod
     state: restarted
     enabled: yes
+
+- name: Download a file and then extract it
+  ansible.builtin.unarchive:
+    src: "https://github.com/raghudevopsb69/{{COMPONENT}}/archive/refs/heads/main.zip"
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Load Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/{{item}}.js"
+    idempotent: yes
+  loop:
+    - catalogue
+    - users
