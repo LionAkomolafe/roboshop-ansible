@@ -22,7 +22,7 @@
 
 - name: Download a file and then extract it
   ansible.builtin.unarchive:
-    src: "https://github.com/raghudevopsb69/{{COMPONENT}}/archive/refs/heads/main.zip"
+    src: "https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip"
     dest: "/tmp"
     remote_src: yes
 
