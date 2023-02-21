@@ -9,6 +9,7 @@
       loop:
         - { name: "param.dev.catalogue.MONGO", value: "true" }
         - { name: "param.dev.catalogue.MONGO_ENDPOINT", value: "dev-mongodb.kingyamza.online"}
+        - { name: "param.dev.catalogue.MONGO_URL", value: "mongodb://dev-mongodb.kingyamza.online:27017/catalogue" }
         - { name: "param.dev.user.MONGO", value: "true" }
         - { name: "param.dev.frontend.CATALOGUE_URL", value: "http://dev-catalogue.kingyamza.online:8080/" }
         - { name: "param.dev.frontend.USER_URL", value: "http://dev-user.kingyamza.online:8080/" }
