@@ -16,3 +16,7 @@
         - { name: "param.dev.frontend.CART_URL", value: "http://dev-cart.kingyamza.online:8080/" }
         - { name: "param.dev.frontend.SHIPPING_URL", value: "http://dev-shipping.kingyamza.online:8080/" }
         - { name: "param.dev.frontend.PAYMENT_URL", value: "http://dev-payment.kingyamza.online:8080/" }
+        - { name: "param.dev.user.MONGO", value: "true" }
+        - { name: "param.dev.user.MONGO_ENDPOINT", value: "dev-mongodb.kingyamza.online" }
+        - { name: "param.dev.user.MONGO_URL", value: "mongodb://dev-mongodb.kingyamza.online:27017/user" }
+        - { name: "param.dev.user.REDIS_HOST", value: "dev-user.kingyamza.online" }
