@@ -15,9 +15,11 @@
 - name: Disable MySQL 8 Version repo
   ansible.builtin.shell: dnf module disable mysql -y
 
-- name: Install MySQL Server
+- name: Install Python and MySQL Server
   ansible.builtin.yum:
-    name: mysql-community-server
+    name:
+      - mysql-community-server
+      - python39-PyMySQL
     state: installed
 
 - name: Start and Enable MySQL Service
