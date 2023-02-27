@@ -33,3 +33,9 @@
     login_user: root
     login_password: "{{ROOT_PASSWORD}}"
     filter: version
+  ignore_errors: yes
+  register: out
+
+- name: debug
+  debug:
+    msg: "{{out}}"
