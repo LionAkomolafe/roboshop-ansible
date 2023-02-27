@@ -25,3 +25,9 @@
     name: mysqld
     state: restarted
     enabled: yes
+
+- name: Get Version
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ROOT_PASSWORD}}"
+    filter: version
