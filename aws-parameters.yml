@@ -23,4 +23,4 @@
         - { name: "param.dev.cart.REDIS_HOST", value: "dev-redis.kingyamza.online" }
         - { name: "param.dev.cart.CATALOGUE_HOST", value: "dev-catalogue.kingyamza.online" }
         - { name: "param.dev.cart.CATALOGUE_PORT", value: "8080" }
-        - { name: "param.dev.mysql.ROOT_PASSWORD", value: "8080" }
+        - { name: "param.dev.mysql.ROOT_PASSWORD", value: "RoboShop@1" }

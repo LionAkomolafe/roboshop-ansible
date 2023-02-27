@@ -6,3 +6,22 @@
   ansible.builtin.fail:
     msg: Expecting root Password input
   when: ROOT_PASSWORD == ""
+
+- name: Copy MySQL Repo File
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Disable MySQL 8 Version repo
+  ansible.builtin.shell: dnf module disable mysql
+
+- name: Install MySQL Server
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: Start and Enable MySQL Service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
