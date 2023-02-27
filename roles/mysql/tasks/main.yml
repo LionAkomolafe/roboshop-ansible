@@ -1,6 +1,6 @@
 - name: Get root password from parameter store
   ansible.builtin.set_fact:
-    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.catalogue.ROOT_PASSWORD', region='us-east-1') }}"
+    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
 
 - name: Expecting the input variable
   ansible.builtin.fail:
