@@ -19,7 +19,7 @@
   ansible.builtin.yum:
     name:
       - mysql-community-server
-      - python39-PyMySQL
+      - python3-PyMySQL
     state: installed
 
 - name: Start and Enable MySQL Service
