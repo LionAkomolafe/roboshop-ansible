@@ -1,1 +1,2 @@
 COMPONENT: mysql
+ENV: dev
