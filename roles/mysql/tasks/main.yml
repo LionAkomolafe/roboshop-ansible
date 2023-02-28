@@ -39,3 +39,8 @@
 - name: debug
   debug:
     msg: "{{out}}"
+
+- name: Copy the Reset Root Password file
+  ansible.builtin.copy:
+    src: root-pass.sql
+    dest: /tmp/root-pass.sql
