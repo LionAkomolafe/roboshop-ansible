@@ -53,4 +53,4 @@
 
 - name: print
   debug:
-    msg: "{{out}}"
+    msg: "{{ out['content'] | b64code }}"
