@@ -1,56 +1,54 @@
-#- name: Get root password from parameter store
-#  ansible.builtin.set_fact:
-#    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
+- name: Get root password from parameter store
+  ansible.builtin.set_fact:
+    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
 
-#- name: Expecting the input variable
-#  ansible.builtin.fail:
-#    msg: Expecting root Password input
-#  when: ROOT_PASSWORD == ""
+- name: Expecting the input variable
+  ansible.builtin.fail:
+    msg: Expecting root Password input
+  when: ROOT_PASSWORD == ""
 
-#- name: Copy MySQL Repo File
-#  ansible.builtin.copy:
-#    src: mysql.repo
-#    dest: /etc/yum.repos.d/mysql.repo
+- name: Copy MySQL Repo File
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
 
-#- name: Disable MySQL 8 Version repo
-#  ansible.builtin.shell: dnf module disable mysql -y
+- name: Disable MySQL 8 Version repo
+  ansible.builtin.shell: dnf module disable mysql -y
 
-#- name: Install Python and MySQL Server
-#  ansible.builtin.yum:
-#    name:
-#      - mysql-community-server
-#      - python3-PyMySQL
-#    state: installed
+- name: Install Python and MySQL Server
+  ansible.builtin.yum:
+    name:
+      - mysql-community-server
+      - python3-PyMySQL
+    state: installed
 
-#- name: Start and Enable MySQL Service
-#  ansible.builtin.systemd:
-#    name: mysqld
-#    state: restarted
-#    enabled: yes
+- name: Start and Enable MySQL Service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
 
-#- name: Get Version
-#  community.mysql.mysql_info:
-#    login_user: root
-#    login_password: "{{ROOT_PASSWORD}}"
-#    filter: version
-#  ignore_errors: yes
-#  register: out
-
-#- name: debug
-#  debug:
-#    msg: "{{out}}"
-
-#- name: Copy the Reset Root Password file
-#  ansible.builtin.copy:
-#    src: root-pass.sql
-#    dest: /tmp/root-pass.sql
-
-
-- name: Load MySQL Log file
-  ansible.builtin.slurp:
-    src: /var/log/mysqld.log
+- name: Get Version
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ROOT_PASSWORD}}"
+    filter: version
+  ignore_errors: yes
   register: out
 
-- name: print
-  debug:
-    msg: "{{ out['content'] | b64decode | regex_findall('temporary password.*') | join(' ') | split(' ') | last }}"
+- name: Change Default Password
+  when: out.failed
+  ansible.builtin.block:
+    - name: Copy the Reset Root Password file
+      ansible.builtin.template:
+        src: root-pass.sql
+        dest: /tmp/root-pass.sql
+
+    - name: Load Mysql Log File
+      ansible.builtin.slurp:
+        src: /var/log/mysqld.log
+      register: mysql_log
+
+    - name: Change Default Password
+      ansible.builtin.shell: cat /tmp/root-pass.sql | mysql --connect-expired-password -uroot -p"{{ out['content'] | b64decode | regex_findall('temporary password.*') | join(' ') | split(' ') | last }}"
+
