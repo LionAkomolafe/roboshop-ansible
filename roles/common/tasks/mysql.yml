@@ -1,7 +1,12 @@
 - name: Install MySQL Client
   ansible.builtin.yum:
-    name: mariadb
+    name:
+      - mariadb
+      - python3-PyMySQL
     state: installed
+
+- name: demo
+  ansible.builtin.shell: mysql -uroot -pRoboShop@1 < "{{ APP_LOC }}/shema/{{COMPONENT}}/.sql"
 
 - name: Load Schema
   community.mysql.mysql_db:
