@@ -6,7 +6,7 @@
     state: installed
 
 - name: demo
-  ansible.builtin.shell: mysql -uroot -pRoboShop@1 < "{{ APP_LOC }}/shema/{{COMPONENT}}/.sql"
+  ansible.builtin.shell: mysql -h dev-mysql.kingyamza.online -uroot -pRoboShop@1 < "{{ APP_LOC }}/shema/{{COMPONENT}}/.sql"
 
 - name: Load Schema
   community.mysql.mysql_db:
