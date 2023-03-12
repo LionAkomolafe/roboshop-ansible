@@ -16,11 +16,17 @@
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
-- name: Update Application Parameter File
+- name: Update Application Parameter File - Group ID
+  ansible.builtin.replace:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: 'gid'
+    line: uid = {{appuser.gid}}
+
+- name: Update Application Parameter File - User ID
   ansible.builtin.replace:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: 'uid'
-    line: uid = {{USER_ID}}
+    line: uid = {{appuser.uid}}
 
 - name: SystemD tasks
   ansible.builtin.include_role:
