@@ -1,0 +1,6 @@
+COMPONENT: payment
+APP_USER: roboshop
+APP_LOC: /home/roboshop/payment
+DBTYPE: mysql
+LOAD_SCHEMA: yes
+ENV: dev
