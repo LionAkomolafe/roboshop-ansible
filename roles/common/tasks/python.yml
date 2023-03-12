@@ -20,7 +20,7 @@
   ansible.builtin.lineinfile:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: 'gid'
-    line: uid = {{appuser.gid}}
+    line: gid = {{appuser.gid}}
 
 - name: Update Application Parameter File - User ID
   ansible.builtin.lineinfile:
