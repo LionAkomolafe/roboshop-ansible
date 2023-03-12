@@ -1,9 +1,9 @@
-- name: Install Maven
+- name: Install Python
   ansible.builtin.yum:
     name:
       - python36
       - gcc
-      - python-3-devel
+      - python3-devel
     state: installed
 
 - name: Download app code Tasks from Common Role
