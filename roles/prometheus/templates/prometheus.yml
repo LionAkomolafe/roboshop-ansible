@@ -22,4 +22,4 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: "ec2-nodes"
     static_configs:
-      - targets: ["18.208.200.121:9100"]
+      - targets: ["172.31.94.87:9100"]
